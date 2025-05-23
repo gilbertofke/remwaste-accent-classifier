@@ -1,40 +1,46 @@
-````markdown name=README.md
 # REMWaste Accent Classifier
 
 [![CI/CD](https://github.com/gilbertofke/remwaste-accent-classifier/actions/workflows/main.yml/badge.svg)](https://github.com/gilbertofke/remwaste-accent-classifier/actions)
 
-A real-time API for English accent classification from audio URLs, powered by Hugging Face models, Redis caching, and Prometheus monitoring.
+A real-time API for classifying English accents from audio URLs. Powered by Hugging Face models, Redis caching, and Prometheus monitoring.
 
-## Table of Contents
+---
+
+## 📚 Table of Contents
 
 - [Features](#features)
 - [Quick Start](#quick-start)
 - [API Usage](#api-usage)
 - [Environment Variables](#environment-variables)
 - [Testing](#testing)
+- [Monitoring](#monitoring)
 - [License](#license)
 
-## Features
+---
 
-- **Real-time accent analysis** via a FastAPI endpoint.
-- **URL-based audio ingestion** (supports HTTP/HTTPS links to audio files).
-- **Accent types detected:** British, American, Australian.
-- **Hugging Face model integration** for audio classification.
-- **Redis caching** for performance and efficiency.
-- **API key authentication** for secure access.
-- **Rate limiting** to prevent abuse.
-- **Prometheus metrics** for monitoring.
-- **Docker support** for easy deployment.
+## 🚀 Features
 
-## Quick Start
+- ⚡ **Real-time accent classification** via FastAPI.
+- 🌐 **URL-based audio ingestion** (`.wav`, `.mp3`, `.flac`, `.ogg`).
+- 🗣️ **Accents supported:** British, American, Australian.
+- 🤗 **Hugging Face model integration**.
+- 🧠 **Redis caching** for improved response times.
+- 🔐 **API key authentication**.
+- 🚫 **Rate limiting** to prevent abuse.
+- 📈 **Prometheus metrics** for monitoring.
+- 🐳 **Docker support** for easy deployment.
+
+---
+
+## ⚡ Quick Start
 
 ### Prerequisites
 
 - Python 3.10+
 - [Docker](https://www.docker.com/) (optional)
-- Redis (Upstash or other, see `.env.example`)
+- Redis instance (e.g., [Upstash](https://upstash.com))
 
-### Local Installation
+### Local Setup
 
 ```bash
 git clone https://github.com/gilbertofke/remwaste-accent-classifier.git
@@ -43,37 +49,34 @@ python -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
-cp .env.example .env
-# Fill in the required environment variables in .env
+cp .env.example .env  # Update .env with your credentials
 uvicorn app.main:app --reload
-```
-
-### Docker
-
-```bash
+Docker Setup
+bash
+Copy
+Edit
 docker build -t accent-classifier .
 docker run --env-file .env -p 8000:8000 accent-classifier
-```
+🧪 API Usage
+POST /api/v1/analyze
+Headers:
 
-## API Usage
+X-API-Key: Your API key
 
-### Analyze Accent
+Request Body:
 
-**Endpoint:** `POST /api/v1/analyze`
-
-**Headers:**
-- `X-API-Key`: Your API key
-
-**Request Body (JSON):**
-```json
+json
+Copy
+Edit
 {
   "url": "https://example.com/audio.wav",
   "language": "en"
 }
-```
+Example Response:
 
-**Response Example:**
-```json
+json
+Copy
+Edit
 {
   "result": {
     "accent": "British",
@@ -89,41 +92,41 @@ docker run --env-file .env -p 8000:8000 accent-classifier
   },
   "source": "fresh"
 }
-```
+Notes:
 
-**Notes:**
-- Only English accents are supported.
-- Audio URL must be HTTP/HTTPS and point to `.wav`, `.mp3`, `.flac`, or `.ogg` files.
-- Cached results are served when available.
+Only English accents are supported.
 
-## Environment Variables
+Audio URLs must use HTTP/HTTPS and point to .wav, .mp3, .flac, or .ogg files.
 
-Copy `.env.example` and fill in your credentials:
+Cached results are served when available.
 
-- `HF_TOKEN`: Hugging Face API token (required)
-- `HF_MODEL_ID`: Hugging Face model ID (default: `speechbrain/lang-id-voxlingua107-ecapa`)
-- `API_KEY`: API key for authentication
-- `UPSTASH_REDIS_URL`: Redis connection URL (Upstash format)
-- `UPSTASH_REDIS_TOKEN`: Redis authentication token
-- `RATE_LIMIT_PER_MINUTE`: Requests per minute per API key (default: 10)
+🔧 Environment Variables
+Copy .env.example and provide the required values:
 
-## Testing
+Variable	Description
+HF_TOKEN	Hugging Face API token (required)
+HF_MODEL_ID	Hugging Face model ID (speechbrain/lang-id-voxlingua107-ecapa by default)
+API_KEY	API key to secure endpoint access
+UPSTASH_REDIS_URL	Redis connection URL (Upstash or other)
+UPSTASH_REDIS_TOKEN	Redis authentication token
+RATE_LIMIT_PER_MINUTE	Request limit per minute per API key (default: 10)
 
-Run tests with:
+🧪 Testing
+Run the test suite using:
 
-```bash
+bash
+Copy
+Edit
 pytest
-```
+📊 Monitoring
+Prometheus-compatible metrics are exposed at:
 
-## Monitoring
+bash
+Copy
+Edit
+/metrics
+📄 License
+This project is licensed under the MIT License.
 
-Prometheus metrics are available at `/metrics` when running the server.
-
-## License
-
-MIT License. See [LICENSE](LICENSE).
-
----
-
-*Developed by [gilbertofke](https://github.com/gilbertofke). Contributions welcome!*
-````
+🛠 Built with passion by gilbertofke
+🤝 Contributions are welcome!
