@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "accent-analyzer"
+version = "0.1.0"
+description = "An accent analysis tool using machine learning"
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "."
+]
+testpaths = [
+    "tests",
+    "tests/integration"
+]
