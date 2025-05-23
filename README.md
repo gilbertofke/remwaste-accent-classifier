@@ -4,7 +4,6 @@
 
 A real-time API for classifying English accents from audio URLs. Powered by Hugging Face models, Redis caching, and Prometheus monitoring.
 
----
 
 ## 📚 Table of Contents
 
@@ -16,7 +15,7 @@ A real-time API for classifying English accents from audio URLs. Powered by Hugg
 - [Monitoring](#monitoring)
 - [License](#license)
 
----
+
 
 ## 🚀 Features
 
@@ -41,8 +40,6 @@ A real-time API for classifying English accents from audio URLs. Powered by Hugg
 - Redis instance (e.g., [Upstash](https://upstash.com))
 
 ### Local Setup
-
-```bash
 git clone https://github.com/gilbertofke/remwaste-accent-classifier.git
 cd remwaste-accent-classifier
 python -m venv venv
@@ -53,8 +50,7 @@ cp .env.example .env  # Update .env with your credentials
 uvicorn app.main:app --reload
 Docker Setup
 bash
-Copy
-Edit
+
 docker build -t accent-classifier .
 docker run --env-file .env -p 8000:8000 accent-classifier
 🧪 API Usage
@@ -64,10 +60,6 @@ Headers:
 X-API-Key: Your API key
 
 Request Body:
-
-json
-Copy
-Edit
 {
   "url": "https://example.com/audio.wav",
   "language": "en"
@@ -114,16 +106,11 @@ RATE_LIMIT_PER_MINUTE	Request limit per minute per API key (default: 10)
 🧪 Testing
 Run the test suite using:
 
-bash
-Copy
-Edit
 pytest
 📊 Monitoring
 Prometheus-compatible metrics are exposed at:
 
-bash
-Copy
-Edit
+
 /metrics
 📄 License
 This project is licensed under the MIT License.
